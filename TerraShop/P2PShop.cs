@@ -131,9 +131,9 @@ namespace TerraShop
                         TradeMisc.NotifyTradePayment(offer.Seller, offer.ItemID, offer.Quantity, offer.TradeItemID, offer.TradeQuantity);
                         DirectOffers.Remove(acc);
                     }
-                    else player.SendErrorMessage("No tienes los ítems requeridos para el intercambio.");
+                    else player.SendErrorMessage("NO_ITEMS_TRADE");
                 }
-                else // Compra por monedas
+                else 
                 {
                     if (ShopMisc.RemoveCoins(player, offer.PriceCopper))
                     {
@@ -145,7 +145,6 @@ namespace TerraShop
                     else player.SendErrorMessage(ShopLang.GetText(player, "NO_COINS"));
                 }
             }
-            // 2. Lógica para compra por índice (desde /shop)
             else if (int.TryParse(args.Parameters[0], out int idx))
             {
                 idx--;
@@ -166,7 +165,6 @@ namespace TerraShop
                 var item = list[idx];
                 if (item.Seller == player.Account.Name) { player.SendErrorMessage(ShopLang.GetText(player, "OWN_ITEM")); return; }
 
-                // Condicional para trade
                 if (item.IsTrade)
                 {
                     if (TradeMisc.RemoveItems(player, item.TradeItemID, item.TradeQuantity))
@@ -177,9 +175,9 @@ namespace TerraShop
                         ShopCore.GlobalShop.Remove(item);
                         ShopStorage.Save();
                     }
-                    else player.SendErrorMessage("No tienes los ítems requeridos para el intercambio.");
+                    else player.SendErrorMessage("NO_ITEMS_TRADE");
                 }
-                else // Compra por monedas
+                else
                 {
                     if (ShopMisc.RemoveCoins(player, item.PriceCopper))
                     {
