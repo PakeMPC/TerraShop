@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
+using System.Linq; 
 using TShockAPI;
 using Terraria;
 
@@ -13,8 +14,10 @@ namespace TerraShop
             var regionsInArea = TShock.Regions.InAreaRegion(player.TileX, player.TileY);
             var topRegion = TShock.Regions.GetTopRegion(regionsInArea);
 
-            string regionName = args.Parameters.Count > 0
-                ? string.Join(" ", args.Parameters)
+            var regionParams = args.Parameters.Skip(2).ToList();
+
+            string regionName = regionParams.Count > 0
+                ? string.Join(" ", regionParams)
                 : topRegion?.Name;
 
             if (string.IsNullOrEmpty(regionName) || TShock.Regions.GetRegionByName(regionName) == null)
@@ -47,8 +50,10 @@ namespace TerraShop
             var regionsInArea = TShock.Regions.InAreaRegion(player.TileX, player.TileY);
             var topRegion = TShock.Regions.GetTopRegion(regionsInArea);
 
-            string regionName = args.Parameters.Count > 0
-                ? string.Join(" ", args.Parameters)
+            var regionParams = args.Parameters.Skip(2).ToList();
+
+            string regionName = regionParams.Count > 0
+                ? string.Join(" ", regionParams)
                 : topRegion?.Name;
 
             if (string.IsNullOrEmpty(regionName) || !ShopCore.ShopRegions.Contains(regionName))
