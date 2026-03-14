@@ -22,13 +22,13 @@ namespace TerraShop
                 return;
             }
 
-            // Buscar el ítem deseado
+            // Buscar el Ã­tem deseado
             var foundItems = TShock.Utils.GetItemByIdOrName(args.Parameters[0]);
             if (foundItems.Count == 0) { player.SendErrorMessage(ShopLang.GetText(player, "ITEM_NOT_FOUND")); return; }
-            if (foundItems.Count > 1) { player.SendErrorMessage("Sé más específico con el nombre del ítem (o usa su ID)."); return; }
+            if (foundItems.Count > 1) { player.SendErrorMessage("ITEM_ID_USE"); return; }
 
             Item desiredItem = foundItems[0];
-            if (desiredItem.type >= 71 && desiredItem.type <= 74) { player.SendErrorMessage("Para pedir dinero usa /sell en su lugar."); return; }
+            if (desiredItem.type >= 71 && desiredItem.type <= 74) { player.SendErrorMessage("CAN_USE_SELL"); return; }
 
             // Cantidad deseada
             int quantity = 1;
