@@ -88,11 +88,11 @@ An advanced economy and trading plugin (P2P and Global) for Terraria (TShock) se
 | `/buy` | `terrashop.shop` | Accepts a direct (P2P) offer from another player. |
 | `/sell <price> <player>`| `terrashop.shop` | Sells the item you are holding in your hand. |
 | `/trade <item> <qty> <player>`| `terrashop.trade` | Trades the item in your hand for another item. |
-| `/shopclear` | `terrashop.shop` | Removes all your items from the shop and returns them to you. |
+| `/shop clear` | `terrashop.shop` | Removes all your items from the shop and returns them to you. |
 | `/shoplang <es/en/pt>` | `terrashop.shoplang` | Changes your personal plugin language. |
-| `/shopregionadd <name>` | `terrashop.region`* | Turns a TShock region into a local shop (requires permissions in the region). |
-| `/shopregiondelete <name>`| `terrashop.region`* | Removes the shop from a region (requires permissions in the region). |
-| `/shoptime <time>` | `terrashop.time` | Changes the expiration time in the global shop (e.g., 12h, 30m). |
+| `/shop region add <name>` | `terrashop.region`* | Turns a TShock region into a local shop (requires permissions in the region). |
+| `/shop region delete <name>`| `terrashop.region`* | Removes the shop from a region (requires permissions in the region). |
+| `/shop time <time>` | `terrashop.time` | Changes the expiration time in the global shop (e.g., 12h, 30m). |
 
 *\* **Note:** For region commands, the player must also have build permissions (owner or shared) in the specified TShock region.*
 
