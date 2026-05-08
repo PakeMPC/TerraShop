@@ -12,7 +12,7 @@ namespace TerraShop
     {
         public override string Name => "TerraShop";
         public override string Author => "PakeMPC";
-        public override Version Version => new Version(1, 3, 4);
+        public override Version Version => new Version(1, 3, 5);
 
         private Dictionary<int, string> LastPlayerRegion = new Dictionary<int, string>();
 
