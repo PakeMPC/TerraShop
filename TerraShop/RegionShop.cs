@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using System.Linq; 
+using System.Linq;
 using TShockAPI;
 using Terraria;
 
@@ -14,7 +14,9 @@ namespace TerraShop
             var regionsInArea = TShock.Regions.InAreaRegion(player.TileX, player.TileY);
             var topRegion = TShock.Regions.GetTopRegion(regionsInArea);
 
-            var regionParams = args.Parameters.Skip(2).ToList();
+            // Determina si saltar 1 parámetro ("add") o 2 ("region", "add")
+            int skipCount = args.Parameters[0].ToLower() == "region" ? 2 : 1;
+            var regionParams = args.Parameters.Skip(skipCount).ToList();
 
             string regionName = regionParams.Count > 0
                 ? string.Join(" ", regionParams)
@@ -50,7 +52,8 @@ namespace TerraShop
             var regionsInArea = TShock.Regions.InAreaRegion(player.TileX, player.TileY);
             var topRegion = TShock.Regions.GetTopRegion(regionsInArea);
 
-            var regionParams = args.Parameters.Skip(2).ToList();
+            int skipCount = args.Parameters[0].ToLower() == "region" ? 2 : 1;
+            var regionParams = args.Parameters.Skip(skipCount).ToList();
 
             string regionName = regionParams.Count > 0
                 ? string.Join(" ", regionParams)
