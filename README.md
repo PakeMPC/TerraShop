@@ -28,7 +28,7 @@ Un plugin avanzado de economía y comercio (P2P y Global) para servidores de Ter
 | `/trade <ítem> [cant] [jugador]`| `terrashop.trade` | Intercambia el ítem en tu mano por otro ítem. |
 | `/shop clear` | `terrashop.shop` | Retira todos tus ítems de la tienda y te los devuelve. |
 | `/shoplang <es/en/pt>` | `terrashop.shoplang` | Cambia tu idioma personal del plugin. |
-| `/shop add``/shop region add [nombre]` | `terrashop.region`* | Convierte una región de TShock en una tienda local. (/shop add si estás dentro de la region) |
+| `/shop add` `/shop region add [nombre]` | `terrashop.region`* | Convierte una región de TShock en una tienda local. (/shop add si estás dentro de la region) |
 | `/shop region delete [nombre]`| `terrashop.region`* | Elimina la tienda de una región. |
 | `/shop time <tiempo>` | `terrashop.time` | Cambia el tiempo de expiración en la tienda global (ej. 12h, 30m, i). |
 
@@ -95,7 +95,7 @@ An advanced economy and trading plugin (P2P and Global) for Terraria (TShock) se
 | `/trade <item> <qty> <player>`| `terrashop.trade` | Trades the item in your hand for another item. |
 | `/shop clear` | `terrashop.shop` | Removes all your items from the shop and returns them to you. |
 | `/shoplang <es/en/pt>` | `terrashop.shoplang` | Changes your personal plugin language. |
-| `/shop region add <name>` | `terrashop.region`* | Turns a TShock region into a local shop (requires permissions in the region). |
+| `/shop add` `/shop region add <name>` | `terrashop.region`* | Turns a TShock region into a local shop (/shop add if you are within the region). |
 | `/shop region delete <name>`| `terrashop.region`* | Removes the shop from a region (requires permissions in the region). |
 | `/shop time <time>` | `terrashop.time` | Changes the expiration time in the global shop (e.g., 12h, 30m). |
 
