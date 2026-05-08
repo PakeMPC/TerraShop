@@ -28,7 +28,7 @@ Un plugin avanzado de economía y comercio (P2P y Global) para servidores de Ter
 | `/trade <ítem> [cant] [jugador]`| `terrashop.trade` | Intercambia el ítem en tu mano por otro ítem. |
 | `/shop clear` | `terrashop.shop` | Retira todos tus ítems de la tienda y te los devuelve. |
 | `/shoplang <es/en/pt>` | `terrashop.shoplang` | Cambia tu idioma personal del plugin. |
-| `/shop region add [nombre]` | `terrashop.region`* | Convierte una región de TShock en una tienda local. |
+| `/shop add``/shop region add [nombre]` | `terrashop.region`* | Convierte una región de TShock en una tienda local. (/shop add si estás dentro de la region) |
 | `/shop region delete [nombre]`| `terrashop.region`* | Elimina la tienda de una región. |
 | `/shop time <tiempo>` | `terrashop.time` | Cambia el tiempo de expiración en la tienda global (ej. 12h, 30m, i). |
 
