@@ -12,7 +12,7 @@ namespace TerraShop
     {
         public override string Name => "TerraShop";
         public override string Author => "PakeMPC";
-        public override Version Version => new Version(1, 3, 1);
+        public override Version Version => new Version(1, 3, 4);
 
         private Dictionary<int, string> LastPlayerRegion = new Dictionary<int, string>();
 
@@ -65,6 +65,21 @@ namespace TerraShop
                         TimeCommand(args);
                         return;
 
+                    // NUEVO: Soporte directo para /shop add y /shop delete
+                    case "add":
+                    case "delete":
+                    case "del":
+                    case "remove":
+                        if (!args.Player.HasPermission("terrashop.region"))
+                        {
+                            args.Player.SendErrorMessage(ShopLang.GetText(args.Player, "NO_REGION_PERMS"));
+                            return;
+                        }
+
+                        if (sub == "add") { RegionShop.AddRegionShop(args); return; }
+                        else { RegionShop.DeleteRegionShop(args); return; }
+
+                    // Se mantiene "region" por compatibilidad si alguien usa el comando viejo
                     case "region":
                         if (!args.Player.HasPermission("terrashop.region"))
                         {
@@ -102,14 +117,18 @@ namespace TerraShop
                 {
                     if (!LastPlayerRegion.ContainsKey(player.Index) || LastPlayerRegion[player.Index] != shopReg.Name)
                     {
-                        List<string> members = new List<string> { shopReg.Owner };
-                        foreach (int id in shopReg.AllowedIDs)
+                        // Verificamos que el jugador NO sea el dueño antes de enviar el mensaje
+                        if (shopReg.Owner != player.Account.Name)
                         {
-                            var acc = TShock.UserAccounts.GetUserAccountByID(id);
-                            if (acc != null) members.Add(acc.Name);
+                            List<string> members = new List<string> { shopReg.Owner };
+                            foreach (int id in shopReg.AllowedIDs)
+                            {
+                                var acc = TShock.UserAccounts.GetUserAccountByID(id);
+                                if (acc != null) members.Add(acc.Name);
+                            }
+                            string allMembers = string.Join(", ", members.Distinct());
+                            player.SendInfoMessage(ShopLang.GetText(player, "REGION_ENTER_NOTICE", allMembers));
                         }
-                        string allMembers = string.Join(", ", members.Distinct());
-                        player.SendInfoMessage(ShopLang.GetText(player, "REGION_ENTER_NOTICE", allMembers));
                     }
                     LastPlayerRegion[player.Index] = shopReg.Name;
                 }
@@ -130,7 +149,7 @@ namespace TerraShop
 
                 if (P2PShop.PendingItems.ContainsKey(accName))
                 {
-                    foreach (var item in P2PShop.PendingItems[accName]) player.GiveItem(item.ItemID, item.Quantity);
+                    foreach (var item in P2PShop.PendingItems[accName]) player.GiveItem(item.ItemID, item.Quantity, item.Prefix);
                     P2PShop.PendingItems.Remove(accName);
                     needsSave = true;
                 }
@@ -183,10 +202,15 @@ namespace TerraShop
 
         private void ClearCommand(CommandArgs args)
         {
-            ShopCore.GlobalShop.Clear();
-            foreach (var p in TShock.Players.Where(p => p != null && p.IsLoggedIn))
-                p.SaveServerCharacter();
+            var myItems = ShopCore.GlobalShop.Where(i => i.Seller == args.Player.Account.Name).ToList();
 
+            foreach (var item in myItems)
+            {
+                args.Player.GiveItem(item.ItemID, item.Quantity, item.Prefix);
+                ShopCore.GlobalShop.Remove(item);
+            }
+
+            args.Player.SaveServerCharacter();
             args.Player.SendSuccessMessage(ShopLang.GetText(args.Player, "SHOP_CLEARED"));
             ShopStorage.Save();
         }
